@@ -59,7 +59,10 @@ function findMatch() {
 
     if (test.length == 2) {
       if (test[0] == test[1]) {
-        $(document).find('div.square img.show').addClass('success').removeClass('show');
+        $(document).find('div.square img.show').addClass('success');
+        // cannot chain the add and remove functions together because (i think) they prevent the tests from matching the first time. 
+        $(document).find('div.square img.show').removeClass('show');
+
         test.splice(0,2);
       }
       else {
