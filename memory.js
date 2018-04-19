@@ -22,7 +22,6 @@ var imgSrc = [
 ];
 
 // on page load, assign an image and source to each box at random.
-
 function shuffle(array) {
   var currentIndex = array.length,
     temporaryValue,
@@ -44,7 +43,6 @@ shuffle(imgSrc);
 
 divs = document.getElementsByClassName('square');
 
-
 function assignSrc() {
   for (i = 0; i < divs.length; i++) {
     divs[i].innerHTML = imgSrc[i];
@@ -53,32 +51,26 @@ function assignSrc() {
 
 function findMatch() {
   var test = [];
-  $('.square').on('click', function() {
-    test.push(this.innerHTML);
+  $(divs).on('click', function() {
+    test.push($(this).children().attr('src'));
     $(this).children().addClass('show');
-
     if (test.length == 2) {
       if (test[0] == test[1]) {
-        $(document).find('div.square img.show').addClass('success');
-        // cannot chain the add and remove functions together because (i think) they prevent the tests from matching the first time. 
-        $(document).find('div.square img.show').removeClass('show');
-
+        $(document).find('div.square img.show').addClass('success').removeClass('show');
         test.splice(0,2);
       }
       else {
-        console.log("not a match");
-        test.splice(0,2);
         noShow();
+        test.splice(0,2);
       }
     }
   });
 
-  if (($(divs).children().hasClass('success').length) == ($(divs).length)){
-    console.log($(divs).children.hasClass('success').length);
+  if (($('.square').find('img.success').length) == ($(divs).length)){
+    console.log($('.square').find('img.success').length);
     alert('YOU DID IT!');
   }
-  console.log($('img.success').length);
-
+  console.log($('.square').find('img.success'));
 }
 
 function noShow() {
@@ -91,10 +83,3 @@ function noShow() {
 
 assignSrc();
 findMatch();
-
-
-// image is set to display none.
-
-// once clicked, box displays an image.
-
-// user can click another box. Display the image. If they match, disappear. If not, flip them both over.
