@@ -97,6 +97,7 @@ function assignSrc(array) {
 function populateGrid() {
   var instructions = "<p>Click on a card, then try to find its match.</p><p>If you select the match, the cards will stay visible with a pink border.</p><p>If the cards don't match, they will flip back over after one second.</p>";
   $('div.topic').on('click', function() {
+    $(this).css({"backgroundColor": "hotpink", "color": "black"});
     $('div.instructions').html(instructions);
     $(divs).addClass('show');
     if ($(this).hasClass('dog')) {
@@ -114,9 +115,6 @@ function populateGrid() {
 
 function findMatch() {
   var test = [];
-  var divs = document.getElementsByClassName('square');
-  console.log(divs);
-
   $(divs).click(function() {
     console.log('success');
     test.push($(this).children().attr('src'));
@@ -131,12 +129,14 @@ function findMatch() {
         test.splice(0,2);
       }
     }
+    // if ($('img.success').length >= $(divs).length) {
+    //   alert('YOU DID IT!')
+    // } else {
+    //     console.log('keep going');
+    //   }
   });
 
-  // if (($('.square').find('img.success').length) == ($(divs).length)){
-  //   console.log($('.square').find('img.success').length);
-  //   alert('YOU DID IT!');
-  // }
+
   // console.log($('.square').find('img.success'));
 }
 
