@@ -63,5 +63,34 @@ img {
 .success {
   border: 3px solid hotpink;
   display: inline-block;
+}
 
+.container-2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.container-2 .square {
+  display: block;
+  width: 15%;
+  min-width: 200px;
+  max-width: 250px;
+  margin: 0 auto;
+  background-image: linear-gradient(90deg,#038aaa 0,#185);
+  height: 160px;
+  margin: 10px;
+  position: relative;
+}
+
+.container-2 .square img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  display: none;
 }

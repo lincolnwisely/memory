@@ -1,4 +1,86 @@
-$(function() {
+// const http = require('http');
+
+// const hostname = '127.0.0.1';
+// const port = 3000;
+
+// const server = http.createServer((req, res) => {
+//   res.statusCode = 200;
+//   res.setHeader('Content-Type', 'text/plain');
+//   res.end('Hello World\n');
+// });
+
+// server.listen(port, hostname, () => {
+//   console.log(`Server running at http://${hostname}:${port}/`);
+// });
+
+var usData = [];
+var query = '';
+
+// var _handleRequest = function(){
+//   if(this.readyState === 4 && this.status === 200){ //Explain this in a bit.
+//     var response = JSON.parse(request.responseText);
+//     var arr = [];
+//     // console.log(arr);
+//     // console.log(response.results);
+//     // return(<Image src={response.results[0].urls.thumb} />);
+//     for (var i = 0; i < response.results.length; i++) {
+//       arr.push(response.results[i]);
+
+//       // console.log(arr[i]);
+//       // console.log(arr[i].links.self);
+//       // console.log(arr[i].user.name);
+//       // console.log(arr[i].user.links.self);
+//       // console.log(arr[i].id);
+//       // console.log(arr);
+      
+//     }
+
+//     // let mapImages = arr.map((item, i) => {
+//     //   return (<Image src={ item.links.self } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
+//     //   }
+//     // );
+//     console.log(mapImages);
+//     return mapImages;
+//     // return (<Image uName={ arr[i].user.name } uLink={ arr[i].user.links.self } key={arr[i].id}/>);
+//   }
+// }
+
+
+function fetchdata(query) {
+  let url = `https://api.unsplash.com/search/photos/?query=` + query;
+  console.log('fetch works!');
+  fetch(url, {
+    method: "GET",
+    headers: {
+      "Authorization" :'Client-ID 70c38f7f44fea0275d6b98177a480c6e23d833cfcfb7672e8efb3f43b150c39a'
+    },
+  }).then(function(res) {
+    if (res.ok) {
+      console.log(res);
+      // Convert response to Json
+      res.json().then(function(data) {
+        usData = data.results; 
+        console.log(data)
+        
+        mapImage() ;
+        
+        console.log('line 22', usData);
+        // monthlySnacks.snacksList = appData;
+        // monthlySnacks.populateTable();
+        // console.log('monthly snacks: ', monthlySnacks);
+        // monthlySnacks.voteEntry();
+
+      });
+    } else if (res.status == 401) {
+    alert("Oops! You are not authorized.");
+    }
+  }, function(e) {
+    alert("Error submitting form!");
+});
+
+}
+
+
 var imgSrc = [
   "<img src='https://images.unsplash.com/photo-1516730099373-6afd7bcc8135?ixlib=rb-0.3.5&s=2709ec36e0fd4712314880f4ace30cd0&auto=format&fit=crop&w=1500&q=80'/>",
   "<img src='https://images.unsplash.com/photo-1508182390781-8dd476c3237c?ixlib=rb-0.3.5&s=8a4f3e212021b9077b540e03e9cd9a10&auto=format&fit=crop&w=1502&q=80'/>",
@@ -100,17 +182,63 @@ function populateGrid() {
     $(this).css({"backgroundColor": "hotpink", "color": "black"});
     $('div.instructions').html(instructions);
     $(divs).addClass('show');
+    
     if ($(this).hasClass('dog')) {
+      query = 'dog';
+
+      console.log(query);
+      fetchdata(query);
+      console.log('usData', usData)
       shuffle(doggos);
       assignSrc(doggos);
     } else if ($(this).hasClass('city')) {
+      query = 'city';
+      fetchdata();
+
       shuffle(cities);
       assignSrc(cities);
-    } else if ($(this).hasClass('everything')) {
-      shuffle(imgSrc);
-      assignSrc(imgSrc);
-    }
+    } 
+    // else if ($(this).hasClass('everything')) {
+      
+    //   shuffle(imgSrc);
+    //   assignSrc(imgSrc);
+    // }
+    // else if user submits a query, show that...
   });
+}
+
+function mapImage() {
+  console.log('ughhhhh us data', usData);
+  usData.forEach(function(item) {
+    
+
+    const markup = `
+    <div class="square show>" <img src="`
+           + item.links.self +
+       `"/>
+       <p class="author"><a href="` + item.user.links.self +  `">`+ item.user.name + `</a></p>
+    </div>
+   `;
+
+   console.log(markup);
+
+   $('.container-2').append(markup);
+
+
+    // this.map(function(item, i) {
+
+    // });
+    //     // let mapImages = arr.map((item, i) => {
+//     //   return (<Image src={ item.links.self } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
+//     //   }
+
+//     // );
+//     console.log(mapImages);
+//     return mapImages;
+//     // return (<Image uName={ arr[i].user.name } uLink={ arr[i].user.links.self } key={arr[i].id}/>);
+//   }
+  });
+  
 }
 
 function findMatch() {
@@ -136,7 +264,6 @@ function findMatch() {
     //   }
   });
 
-
   // console.log($('.square').find('img.success'));
 }
 
@@ -161,6 +288,32 @@ function noShow() {
 //   assignSrc(foods);
 // }
 
-  populateGrid();
-  findMatch();
-});
+
+
+
+const photo = {
+  src: '',
+  author: '',
+  url: '',
+  category: ''
+}
+
+
+var Photo = function (src, author, authorUrl) {
+  this.src = src;
+  this.author = author;
+  this.authorUrl = authorUrl;
+}
+// var usImg = new Photo();
+
+populateGrid();
+// fetchdata();
+
+findMatch();
+
+
+// image url = [i].links.self
+//Unsplash = unsplash
+
+//the Unsplash photographer name = [i].user.name
+// link to Unsplash profile =  [i].user.links.self
