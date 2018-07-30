@@ -49,6 +49,7 @@ var query = '';
 function fetchdata(query) {
   let url = `https://api.unsplash.com/search/photos/?query=` + query;
   console.log('fetch works!');
+  console.log(url);
   fetch(url, {
     method: "GET",
     headers: {
@@ -76,7 +77,7 @@ function fetchdata(query) {
 
           const markup = `
           <div class="square show>" <img src="`
-                 + item.links.self +
+                 + item.links.html +
              `"/>
              <p class="author"><a href="` + item.user.links.self +  `">`+ item.user.name + `</a></p>
           </div>
@@ -99,6 +100,7 @@ function fetchdata(query) {
     }
   }, function(e) {
     alert("Error submitting form!");
+
 });
 
 }
@@ -190,12 +192,12 @@ function shuffle(array) {
   return array;
 };
 
-function assignSrc(array) {
-  console.log(divs + 'line 91');
-  for (i = 0; i < divs.length; i++) {
-    divs[i].innerHTML = array[i];
-  }
-}
+// function assignSrc(array) {
+//   console.log(divs + 'line 91');
+//   for (i = 0; i < divs.length; i++) {
+//     divs[i].innerHTML = array[i];
+//   }
+// }
 
 // create function that takes in user input (which icon is clicked or which selector in a form is chosen - and based on that value, populates the divs with the selected category.
 
@@ -209,7 +211,6 @@ function populateGrid() {
     if ($(this).hasClass('dog')) {
       query = 'dog';
 
-      console.log(query);
       fetchdata(query);
       console.log('usData', usData)
       shuffle(doggos);
@@ -228,25 +229,16 @@ function populateGrid() {
     // }
     // else if user submits a query, show that...
   });
-}
 
-function mapImage() {
-  console.log('ughhhhh us data', usData);
-  usData.forEach(function(item) {
-    
+    $('button').on('click', function(e) {
+      query = $('#search').val();
+      console.log(query);
+      fetchdata(query);
 
-    const markup = `
-    <div class="square show>" <img src="`
-           + item.links.self +
-       `"/>
-       <p class="author"><a href="` + item.user.links.self +  `">`+ item.user.name + `</a></p>
-    </div>
-   `;
+      // shuffle(cities);
+      // assignSrc(cities);
 
-   console.log(markup);
-
-   $('.container-2').append(markup);
-  });
+    })
   
 }
 
