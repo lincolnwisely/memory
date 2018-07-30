@@ -62,7 +62,30 @@ function fetchdata(query) {
         usData = data.results; 
         console.log(data)
         
-        mapImage() ;
+
+        // duplicate items in array so each one has a match!
+        var usData = usData.reduce(function (res, current, index, array) {
+          return res.concat([current, current]);
+        }, []);
+        
+        shuffle(usData);
+
+
+        usData.forEach(function(item) {
+    
+
+          const markup = `
+          <div class="square show>" <img src="`
+                 + item.links.self +
+             `"/>
+             <p class="author"><a href="` + item.user.links.self +  `">`+ item.user.name + `</a></p>
+          </div>
+         `;
+      
+         console.log(markup);
+      
+         $('.container-2').append(markup);
+        });
         
         console.log('line 22', usData);
         // monthlySnacks.snacksList = appData;
@@ -190,7 +213,7 @@ function populateGrid() {
       fetchdata(query);
       console.log('usData', usData)
       shuffle(doggos);
-      assignSrc(doggos);
+      // assignSrc(doggos);
     } else if ($(this).hasClass('city')) {
       query = 'city';
       fetchdata();
@@ -223,20 +246,6 @@ function mapImage() {
    console.log(markup);
 
    $('.container-2').append(markup);
-
-
-    // this.map(function(item, i) {
-
-    // });
-    //     // let mapImages = arr.map((item, i) => {
-//     //   return (<Image src={ item.links.self } uName={ item.user.name } uLink={ item.user.links.self } key={ item.id }/>);
-//     //   }
-
-//     // );
-//     console.log(mapImages);
-//     return mapImages;
-//     // return (<Image uName={ arr[i].user.name } uLink={ arr[i].user.links.self } key={arr[i].id}/>);
-//   }
   });
   
 }
