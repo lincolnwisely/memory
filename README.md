@@ -1,4 +1,12 @@
 # memory
 
-challenged myself to create a memory game using javascript and jquery. 
-nothing fancy.
+This game uses the Unsplash API to populate images based on the search query. Users have the option of selecting a pre-defined query or choosing their own. 
+
+Future enhancements could include: 
+- A counter to keep track of clicks
+- A timer
+- Error message if searched keyword yields no responses
+- Animations for show/hide
+- Levels of difficulty (increase # of squares, limit time image is exposed, etc.)
+
+Hope you enjoy.

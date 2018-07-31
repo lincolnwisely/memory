@@ -1,3 +1,5 @@
+/* Globals */
+
 body {
   font-family: 'Inconsolata', monospace;
   text-align: center;
@@ -14,6 +16,9 @@ h3 {
   font-size: 1.5em;
 }
 
+
+/* Pre-Game Elements */
+
 .icons {
   display: flex;
   justify-content: center;
@@ -27,6 +32,7 @@ h3 {
   background-color: black;
   color: white;
   margin-right: 15px;
+  border: 2px solid black;
 }
 
 .topic.active {
@@ -35,90 +41,7 @@ h3 {
   color: black;
 }
 
-
-.hide {
-  background-image: none;
-}
-
-.show {
-  display: inline-block;
-}
-
-.hide {
-  display: none;
-}
-
-.container-2 {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  width: 80%;
-  margin: 0 auto;
-  justify-content: center;
-  padding-bottom: 50px;
-}
-
-.container-2 .square {
-  display: block;
-  width: 15%;
-  min-width: 200px;
-  max-width: 250px;
-  margin: 0 auto;
-  background-color: #000;;
-  height: 160px;
-  margin: 10px;
-  position: relative;
-  border: 2px solid black;
-  overflow: hidden;
-}
-
-
-.container-2 .square.success {
-  border: 2px solid hotpink;
-  outline: 3px solid hotpink;
-  outline-offset: -4px;
-}
-
-
-.container-2 .square.success img {
-  display: block;
-}
-
-.container-2 .square img {
-  display: none;
-  object-fit: contain;
-  max-width: 240px;
-  object-position: center;
-}
-
-.container-2 .square img.show {
-  display: block;
-}
-
-p.credit {
-  font-family: 'Inconsolata', monospace;
-  color: #fff;
-  position: absolute;
-  bottom: 0;
-  margin: 0;
-  font-size: 10px;
-  text-align: center;
-  margin: 0 auto;
-  padding: 2px 0px 4px 0px;
-  background: rgba(0,0,0,0.5);
-  width: 100%;
-  display: none;
-}
-
-p.credit.show {
-  display: flex;
-  justify-content: space-around;
-}
-
-.credit a {
-  color: #fff;
-  font-size: 10px;
-}
+/* Search form */
 
 
 input#search {
@@ -146,6 +69,86 @@ button {
   outline: none;
 }
 
+/* Grid Elements */
+
+.show {
+  display: inline-block;
+}
+
+.container-2 {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.container-2 .square {
+  display: block;
+  width: 15%;
+  min-width: 200px;
+  max-width: 250px;
+  margin: 0 auto;
+  background-color: #000;;
+  height: 160px;
+  margin: 10px;
+  position: relative;
+  border: 2px solid black;
+  overflow: hidden;
+}
+
+.container-2 .square.success {
+  border: 2px solid hotpink;
+  outline: 3px solid hotpink;
+  outline-offset: -4px;
+}
+
+.container-2 .square.success img {
+  display: block;
+}
+
+.container-2 .square img {
+  display: none;
+  object-fit: contain;
+  max-width: 240px;
+  object-position: center;
+}
+
+.container-2 .square img.show {
+  display: block;
+}
+
+/* Unsplash Credentials */
+
+p.credit {
+  font-family: 'Inconsolata', monospace;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  font-size: 10px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2px 0px 4px 0px;
+  background: rgba(0,0,0,0.5);
+  width: 100%;
+  display: none;
+}
+
+p.credit.show {
+  display: flex;
+  justify-content: space-around;
+}
+
+.credit a {
+  color: #fff;
+  font-size: 10px;
+}
+
+/* Footer */
+
 .last {
   position: absolute;
   bottom: 0;
@@ -161,4 +164,35 @@ button {
 
 .last span a {
   color: darkmagenta;
+}
+
+/* Congrats Pop-up */
+
+.congrats {
+  display: none;
+  padding: 40px;
+  width: 500px;
+  text-align: center;
+  background-color: hotpink;
+  margin: 20px auto;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40%;
+  z-index: 10;
+}
+
+.congrats div {
+  width: 140px;
+  border: 2px solid black;
+  margin: 0 auto;
+  background-color: hotpink;
+}
+
+.congrats div:hover {
+  width: 140px;
+  border: 2px solid black;
+  margin: 0 auto;
+  background-color: white;
+  transition: background-color 1s ease;
 }

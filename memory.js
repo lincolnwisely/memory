@@ -4,8 +4,6 @@ var query = '';
 
 function fetchdata(query) {
   let url = `https://api.unsplash.com/search/photos/?query=` + query;
-  console.log('fetch works!');
-  console.log(url);
   fetch(url, {
     method: "GET",
     headers: {
@@ -17,14 +15,12 @@ function fetchdata(query) {
       res.json().then(function(data) {
         usData = data.results; 
         
-
         // duplicate items in array so each one has a match!
         var usData = usData.reduce(function (res, current, index, array) {
           return res.concat([current, current]);
         }, []);
         
         shuffle(usData);
-        console.log(usData);
 
         var markup = '';
         usData.forEach(function(item) {    
@@ -45,16 +41,26 @@ function fetchdata(query) {
 
                         
         $('.square').on('click', function() {
-          console.log('this', this);
           test.push($(this).children('img').attr('src'));
-          console.log(test);
 
+          // Reveal image and image credit (API guidelines)
           $(this).children().addClass('show');
           $(this).children().children().addClass('show');
-          console.log(test.length);
+
+   
           if (test.length == 2) {
             if (test[0] == test[1]) {
               $(document).find('div.square img.show').parent().addClass('success');
+              var sqNum = $(".container-2 .square").length;
+              var sucNum = $(".container-2 .success").length;
+            
+      
+              if (sqNum == sucNum) {
+                setTimeout(function()
+                {
+                  $('.congrats').show();
+                }, 300);
+              }
               test.splice(0,2);
             }
             else {
@@ -62,7 +68,9 @@ function fetchdata(query) {
               test.splice(0,2);
             }
           }
+
         });
+
 
       });
     } else if (res.status == 401) {
@@ -104,7 +112,6 @@ function populateGrid() {
 
     $(this).addClass('active');
     $('div.instructions').html(instructions);
-    // $(divs).addClass('show');
     
     if ($(this).hasClass('dog')) {
       $(divs).addClass('show');
@@ -143,6 +150,7 @@ function findMatch() {
 
       var sqNum = $(".container-2 .square").length;
       var sucNum = $(".container-2 .success").length;
+
       if (sqNum == sucNum) {
         alert('you did it!');
       }
@@ -152,10 +160,6 @@ function findMatch() {
       test.splice(0,2);
     }
   }
-
-  // if (($(".container-2 .square").length) == ($(".container-2 .success").length)) {
-  //   alert('you did it!');
-  // }
 
 }
 
