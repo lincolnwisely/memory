@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "node-sass": "^4.12.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch assets/scss -o assets/css"
+  },
+  "name": "memory",
+  "description": "This game uses the Unsplash API to populate images based on the search query. Users have the option of selecting a pre-defined query or choosing their own.",
+  "version": "1.0.0",
+  "main": "memory.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lincolnwisely/memory.git"
+  },
+  "author": "lincoln wisely",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/lincolnwisely/memory/issues"
+  },
+  "homepage": "https://github.com/lincolnwisely/memory#readme"
+}

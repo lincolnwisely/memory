@@ -1,0 +1,24 @@
+p.credit {
+  font-family: "Inconsolata", monospace;
+  color: $white;
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  font-size: 10px;
+  text-align: center;
+  margin: 0 auto;
+  padding: 2px 0px 4px 0px;
+  background: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  display: none;
+
+  &.show {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  a {
+    color: $white;
+    font-size: 10px;
+  }
+}

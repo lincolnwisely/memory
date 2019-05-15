@@ -10,26 +10,31 @@
     <!-- Place favicon.ico in the root directory -->
     <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
 
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="assets/css/style.css">
   </head>
 
   <body>
-    <h1>–– Memory Game -–</h1>
+    <h1>Memory Game</h1>
     <h3>Select a topic</h3>
     <div class="icons">
-      <div class="topic dog">Dogs</div>
-      <div class="topic city">Cities</div><br/>
-      <div class="topic coffee">Coffee</div><br/>
+      <div id="puppies"class="topic">Puppies</div>
+      <div id="triangles" class="topic">Triangles</div><br/>
+      <div id="coffee" class="topic">Coffee</div><br/>
     </div>
 
-    <div>
+    <div id="search-container">
       <span>Or choose your own!</span>
-      <input id="search"/><button>Enter</button>
+      <input id="search"/ >
+
     </div>
       <!-- <div class="topic everything">Everything</div> -->
     <div class="instructions">
-      <!-- <p>Click on a card, then try to find its match.</p><p>If you select the match, the cards will stay visible with a pink border.</p><p>If the cards don't match, they will flip back over after one second.</p> -->
+      <p>Click on a card, then try to find its match.</p><p>If you select the match, the cards will stay visible with a pink border.</p><p>If the cards don't match, they will flip back over after one second.</p>
+    </div>
+    <div class="instructions-oops">
+      <p class="error">Oh no - your query came up empty. Try something else.</p>
     </div>
     <div class="congrats">
       <h3>Congrats - you did it!!!</h3>

@@ -1,0 +1,31 @@
+/* Congrats Pop-up */
+
+.congrats {
+  border: 5px solid $white;
+  display: none;
+  padding: 40px;
+  width: 500px;
+  text-align: center;
+  background-color: $hotlink;
+  margin: 20px auto;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40%;
+  z-index: 10;
+
+  div {
+    width: 140px;
+    border: 2px solid $black;
+    margin: 0 auto;
+    background-color: $hotlink;
+
+    &:hover {
+      width: 140px;
+      border: 2px solid $black;
+      margin: 0 auto;
+      background-color: $white;
+      transition: background-color 1s ease;
+    }
+  }
+}
