@@ -13,7 +13,63 @@ var test = [];
 
 
 // FUNCTIONS
+
+// Fetch data from suggested keywords
+function suggestedSearch() {
+  $('div.topic').on('click', function() {
+    // Clear any old images
+    clearContainer();
+    // Clear input form
+    clearSearch();
+    // Remove any active classes
+    $('div.topic').removeClass('active');
+    // Set active on this
+    $(this).addClass('active');
+    let query = $(this).attr('id');
+    $(divs).addClass('show');
+    fetchdata(query);
+  });
+}
+
+
+// Fetch data from custom keywords
+function customSearch() {
+    // Base query on input field
+    let searchInput = document.querySelector("#search");
+
+    searchInput.addEventListener('click',function(e){
+      $('.topic').removeClass('active');
+
+      this.value = '';
+      $('.instructions-oops').removeClass('show');
+      $('.instructions').removeClass('show');
+      clearContainer();
+    });
+
+    searchInput.addEventListener('keydown',function(e){
+      if (e.keyCode === 13) {
+        submitQuery(e);
+      }
+    });
+
+    function submitQuery(e) {
+      var query = e.target.value;
+      fetchdata(query);
+    }
+}
+
+// Populate the memory grid with the selected category.
+function initiateSearch() {
+  suggestedSearch();
+  customSearch();
+  document.querySelector("#search").addEventListener("click",function(e){
+    $('.topic').removeClass('active');
+  });
+}
+
+
 // Build the image markup for each item in the data array
+// Runs inside Fetch Data function
 function buildImg(imgLink, userLink, userName) {
   let markup;
   markup = `<div class="square show"> <img src="`
@@ -27,6 +83,7 @@ function buildImg(imgLink, userLink, userName) {
 }
 
 // Populate the squares in the container
+// Runs inside Fetch Data function
 function populateSquares(destination, markups) {
   document.querySelector(destination).innerHTML = markups.map(function(markup) {
     return markup}).join('');
@@ -44,14 +101,16 @@ function fetchdata(query) {
     if (res.ok) {
       // Convert response to Json
       res.json().then(function(data) {
+        // Array of objects
         usData = [];
+        // Array of markup
         imgMarkups = [];
         usData = data.results;
         removeItems(usData, 2);
 
         if (usData.length < 8) {
           document.querySelector('.instructions-oops').classList.add('show');
-           imgMarkups = [];
+          clearContainer();
         }
 
         else {
@@ -85,62 +144,6 @@ function fetchdata(query) {
 }
 
 
-// Populate the memory grid with the selected category.
-function populateImageContainer() {
-  suggestedSearch();
-  customSearch();
-  document.querySelector("#search").addEventListener("click",function(e){
-    $('.topic').removeClass('active');
-  });
-
-}
-
-// Fetch data from suggested keywords
-function suggestedSearch() {
-  $('div.topic').on('click', function() {
-    // Clear any old images
-    clearContainer();
-    // Clear input form
-    clearSearch('#search');
-    // Remove any active classes
-    $('div.topic').removeClass('active');
-    // Set active on this
-    $(this).addClass('active');
-    let query = $(this).attr('id');
-    $(divs).addClass('show');
-    fetchdata(query);
-  });
-}
-
-
-// Fetch data from custom keywords
-function customSearch() {
-    // Base query on input field
-    let searchInput = document.querySelector("#search");
-
-    searchInput.addEventListener("click",function(e){
-      $('.topic').removeClass('active');
-
-      this.value = "";
-      // clearSearch(this);
-      $('.instructions-oops').removeClass('show');
-      $('.instructions').removeClass('show');
-      clearContainer();
-    });
-
-    searchInput.addEventListener("keydown",function(e){
-      if (e.keyCode === 13) {
-        submitQuery(e);
-      }
-    });
-
-    function submitQuery(e) {
-      var text = e.target.value;
-      fetchdata(text);
-    }
-}
-
-
 // Test if all images are matched
 function findMatch() {
   that = this;
@@ -150,13 +153,6 @@ function findMatch() {
     if (test[0] == test[1]) {
       $(document).find('div.square img.show').addClass('success').removeClass('show');
       test.splice(0,2);
-
-      var sqNum = $(".container-2 .square").length;
-      var sucNum = $(".container-2 .success").length;
-
-      if (sqNum == sucNum) {
-        alert('you did it!');
-      }
     }
     else {
       noShow();
@@ -183,7 +179,7 @@ function selectImage(array) {
     $(this).children().children().addClass('show');
 
     if (array.length >= 2) {
-      compareImages(test);
+      compareImages(array);
     }
   })
 }
@@ -192,7 +188,7 @@ function selectImage(array) {
 // Test for a match if there are two active images
 function compareImages(array) {
   if(array.length == 2 ) {
-    if (test[0] == test[1]) {
+    if (array[0] == array[1]) {
       $(document).find('div.square img.show').parent().addClass('success');
       var sqNum = $(".container-2 .square").length;
       var sucNum = $(".container-2 .success").length;
@@ -203,11 +199,11 @@ function compareImages(array) {
           $('.congrats').show();
         }, 300);
       }
-      test.splice(0,2);
+      array.splice(0,2);
     }
     else {
       noShow();
-      test.splice(0,2);
+      array.splice(0,2);
     }
   }
 }
@@ -232,8 +228,8 @@ function shuffle(array) {
   return array;
 };
 
-function clearSearch(destination) {
-  document.querySelector(destination).value = "";
+function clearSearch() {
+  document.querySelector('#search').value = "";
 }
 
 function clearContainer() {
@@ -257,4 +253,4 @@ function memoryGame() {
 
 
 // Kick off the app by fetching Unsplash data when search is submitted
-populateImageContainer();
+initiateSearch();

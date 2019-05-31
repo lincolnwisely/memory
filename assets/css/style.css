@@ -8,7 +8,7 @@ body {
   min-height: 100vh; }
 
 h1 {
-  padding: 20px;
+  padding: 10px 0 20px;
   width: 50%;
   text-align: center;
   margin: 30px auto;
@@ -76,31 +76,6 @@ h3 {
   margin: 0 auto;
   justify-content: center;
   padding-bottom: 50px; }
-  .container-2 .square {
-    display: block;
-    width: 15%;
-    min-width: 200px;
-    max-width: 250px;
-    margin: 0 auto;
-    background-color: #222;
-    height: 160px;
-    margin: 10px;
-    position: relative;
-    border: 2px solid #222;
-    overflow: hidden; }
-    .container-2 .square img {
-      display: none;
-      object-fit: inherit;
-      max-width: 330px;
-      height: auto; }
-      .container-2 .square img.show {
-        display: block; }
-    .container-2 .square.success {
-      border: 2px solid #f442d9;
-      outline: 3px solid #f442d9;
-      outline-offset: -4px; }
-      .container-2 .square.success img {
-        display: block; }
 
 /* Search form */
 #search-container {
@@ -121,25 +96,51 @@ h3 {
     margin-left: 10px;
     outline: none; }
 
-p.credit {
-  font-family: "Inconsolata", monospace;
-  color: #fff;
-  position: absolute;
-  bottom: 0;
-  margin: 0;
-  font-size: 10px;
-  text-align: center;
+.square {
+  display: block;
+  width: 15%;
+  min-width: 200px;
+  max-width: 250px;
   margin: 0 auto;
-  padding: 2px 0px 4px 0px;
-  background: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  display: none; }
-  p.credit.show {
-    display: flex;
-    justify-content: space-around; }
-  p.credit a {
+  background-color: #222;
+  height: 160px;
+  margin: 10px;
+  position: relative;
+  border: 2px solid #222;
+  overflow: hidden; }
+  .square img {
+    display: none;
+    object-fit: inherit;
+    max-width: 330px;
+    height: auto;
+    object-position: center; }
+    .square img.show {
+      display: block; }
+  .square.success {
+    border: 2px solid #f442d9;
+    outline: 3px solid #f442d9;
+    outline-offset: -4px; }
+    .square.success img {
+      display: block; }
+  .square p.credit {
+    font-family: "Inconsolata", monospace;
     color: #fff;
-    font-size: 10px; }
+    position: absolute;
+    bottom: 0;
+    margin: 0;
+    font-size: 10px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 2px 0px 4px 0px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    display: none; }
+    .square p.credit.show {
+      display: flex;
+      justify-content: space-around; }
+    .square p.credit a {
+      color: #fff;
+      font-size: 10px; }
 
 /* Congrats Pop-up */
 .congrats {

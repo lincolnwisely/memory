@@ -8,7 +8,7 @@ body {
 
 
 h1 {
-  padding: 20px;
+  padding: 10px 0 20px;
   width: 50%;
   text-align: center;
   margin: 30px auto;
@@ -100,39 +100,4 @@ h3 {
   margin: 0 auto;
   justify-content: center;
   padding-bottom: 50px;
-
-  .square {
-    display: block;
-    width: 15%;
-    min-width: 200px;
-    max-width: 250px;
-    margin: 0 auto;
-    background-color: $black;
-    height: 160px;
-    margin: 10px;
-    position: relative;
-    border: 2px solid $black;
-    overflow: hidden;
-
-    img {
-      display: none;
-      object-fit: inherit;
-      max-width: 330px;
-      height: auto;
-
-      &.show {
-        display: block;
-      }
-    }
-
-    &.success {
-      border: 2px solid $hotlink;
-      outline: 3px solid $hotlink;
-      outline-offset: -4px;
-
-      img {
-        display: block;
-      }
-    }
-  }
 }
